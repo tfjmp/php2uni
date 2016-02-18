@@ -1,9 +1,14 @@
 # php2uni
 
+This project build uppon the [IncludeOS](http://www.includeos.org/) Unikernel.
+The idea is simply to transpile PHP file into a Unikernel.
+
 To get started simply:
 
-$ make install
-$ make all
+```
+  $ make install
+  $ make all
+```
 
 The install phase may take a while (around 30mins) and will require root privileges.
 However it needs to be executed only once.
