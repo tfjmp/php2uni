@@ -10,7 +10,7 @@ To get started simply:
   $ make all
 ```
 
-The install phase may take a while (around 30mins) and will require root privileges.
+The install phase may take a while (around 30mins) and will ask for root privileges.
 However it needs to be executed only once.
 
 To modify the site create/edit PHP files in seed and modify in consequence the routes file.
