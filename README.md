@@ -3,6 +3,8 @@
 This project build uppon the [IncludeOS](http://www.includeos.org/) Unikernel.
 The idea is simply to transpile PHP file into a Unikernel.
 
+In order to run it requires **Ubuntu 14.04 LTS x86_64**, either on physical or virtual machine.
+For more configuration details please refer to [IncludeOS github page](https://github.com/hioa-cs/IncludeOS).
 To get started simply:
 
 ```
