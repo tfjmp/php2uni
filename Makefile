@@ -13,4 +13,7 @@ all:
 	cp ./build/seed/PHP2Uni ./seed/PHP2Uni
 	cp ./build/seed/PHP2Uni.img ./seed/PHP2Uni.img
 
+run:
+	./seed/run.sh ./seed/PHP2Uni.img
+
 default: all

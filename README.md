@@ -10,6 +10,7 @@ To get started simply:
 ```
   $ make install
   $ make all
+  $ make run
 ```
 
 The install phase may take a while (around 30mins) and will ask for root privileges.
