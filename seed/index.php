@@ -31,19 +31,35 @@ function /*void*/ my_function(){
 }
 ?>
 
+<?php require_once('./test.php'); ?>
+
+<p>
 <?php
-require_once('./test.php');
-
-
 /*int*/ $x=3;
 echo $x;
+?>
+</p>
+<p>
+<?php
 $x+=4+4;
 echo $x;
+?>
+</p>
+<p>
+<?php
 my_function();
 $foo = new MyClass;
 $foo->setA(4);
 echo $foo->getA();
+?>
+</p>
+<p>
+<?php
 $bar = new MyClass;
 $bar->setB(3.14);
 echo $bar->getB();
 ?>
+</p>
+
+<h2><?php echo date(W3C); ?></h2>
+<h2>Page created on <?php echo date(W3C, mktime(20, 1, 1, 2, 18, 2016)); ?></h2>

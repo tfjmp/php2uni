@@ -18,6 +18,8 @@
 #ifndef PHP2UNI_RESPONSE_PHP_HPP
 #define PHP2UNI_RESPONSE_PHP_HPP
 
+#include <ctime>
+#include "date_constants.hpp"
 #include "response.hpp"
 
 namespace http {
@@ -49,6 +51,47 @@ namespace http {
     int http_response_code(int status){
       _status=status;
       return _status;
+    }
+
+    std::string date(std::string format, int date=-1){
+      /* TODO deal with the formatting */
+      std::stringstream ss;
+      std::time_t now;
+      if(date!=-1){
+        now = (std::time_t)date;
+      }else{
+        now = std::time(0);
+      }
+
+      std::tm *ltm = localtime(&now);
+      if(format==W3C){
+        ss << 1900 + ltm->tm_year << "-" <<  1 + ltm->tm_mon << "-" << ltm->tm_mday;
+        ss << " " << 1 + ltm->tm_hour << ":" << 1 + ltm->tm_min << ":" << 1 + ltm->tm_sec;
+        ss << "+00:00";
+      }else{ // default to W3C
+        ss << 1900 + ltm->tm_year << "-" <<  1 + ltm->tm_mon << "-" << ltm->tm_mday;
+        ss << " " << 1 + ltm->tm_hour << ":" << 1 + ltm->tm_min << ":" << 1 + ltm->tm_sec;
+        ss << "+00:00";
+      }
+      return ss.str();
+    }
+
+
+    int mktime(int hour=0, int min=0, int second=0, int month=0, int day=0, int year=0){
+      std::time_t rawtime;
+      std::tm *timeinfo;
+
+      std::time(&rawtime);
+      timeinfo = localtime ( &rawtime );
+      timeinfo->tm_year = year - 1900;
+      timeinfo->tm_mon = month - 1;
+      timeinfo->tm_mday = day;
+      timeinfo->tm_hour = hour-1;
+      timeinfo->tm_min = min-1;
+      timeinfo->tm_sec = second-1;
+      rawtime = std::mktime(timeinfo);
+
+      return (int)rawtime;
     }
   };
 }
