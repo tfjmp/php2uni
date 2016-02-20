@@ -46,6 +46,8 @@ $foo->setB(3.14);
   , and more <?php echo $foo->getA()+$foo->getB(); ?>
 </p>
 
+<p><a href="/hello?hello=world&from=index">Get parameter example.</a></p>
+
 <?php
   require 'elements/footer.php'
 ?>

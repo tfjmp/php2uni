@@ -18,6 +18,8 @@
 #ifndef PHP2UNI_RESPONSE_PHP_HPP
 #define PHP2UNI_RESPONSE_PHP_HPP
 
+#define _s__GET _req._get
+
 #include <ctime>
 #include "date_constants.hpp"
 #include "response.hpp"

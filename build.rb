@@ -35,7 +35,7 @@ end
 
 routes_str=""
 routes.each do |c|
-  routes_str+="\t\t\tif(r.get_method()==\"#{c[0]}\" && r.get_uri()==\"#{c[1]}\"){\n"
+  routes_str+="\t\t\tif(r.get_method()==\"#{c[0]}\" && r.get_path()==\"#{c[1]}\"){\n"
   routes_str+="\t\t\t\t#{c[2]} res(r);\n"
   routes_str+="\t\t\t\tres.compute();\n"
   routes_str+="\t\t\t\trtn=res;\n"

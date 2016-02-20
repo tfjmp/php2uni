@@ -1,3 +1,3 @@
 GET / index.php
 GET /index index.php
-GET /hello hello.php
+GET /hello hello_get.php

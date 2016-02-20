@@ -23,15 +23,20 @@
 #define PHP2UNI_REQUEST_HPP
 
 #include <sstream>
+#include <string>
+#include <algorithm>    // find
 #include "message.hpp"
+#include "uri.hpp"
 
 namespace http {
   class Request: public Message{
   private:
     std::string _method;
+    std::string _path;
     std::string _uri;
 
   public:
+    std::map<std::string, std::string> _get;
     Request(){}
 
     Request(std::string &raw){
@@ -42,8 +47,33 @@ namespace http {
       _method=method;
       ss >> uri;
       _uri = uri;
+      Uri u = Uri::Parse(s2ws(uri));
+      _path = ws2s(u.Path);
+      if(u.QueryString.size()>0){
+        parse_query(u.QueryString);
+      }
       ss >> version;
       _version = version;
+    }
+
+    void parse_query(const std::wstring& query){
+      typedef std::wstring::const_iterator iterator_t;
+
+      iterator_t begin = query.begin();
+      begin++;
+      iterator_t end = query.end();
+      iterator_t param_end;
+      do{
+        std::wstring key, value;
+        param_end = std::find(begin, end, L'&');
+        iterator_t equal = std::find(begin, param_end, L'=');
+        key = std::wstring(begin, equal);
+        equal++;
+        value = std::wstring(equal, param_end);
+        _get.insert( std::pair<std::string,std::string>(ws2s(key),ws2s(value)) );
+        begin = param_end;
+        begin++;
+      }while(param_end<end);
     }
 
     std::string get_header(){
@@ -56,8 +86,8 @@ namespace http {
       return _method;
     }
 
-    std::string get_uri(){
-      return _uri;
+    std::string get_path(){
+      return _path;
     }
   };
 }
