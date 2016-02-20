@@ -22,16 +22,21 @@
 #define _s__SERVER _server
 
 #include <ctime>
+#include <string>
+#include <stdio.h>
+#include <stdlib.h>
 #include "date_constants.hpp"
 #include "response.hpp"
 
-namespace http {
+using namespace http;
+
+namespace php {
 
   typedef char* cstr_t;
 
   class ResponsePHP: public Response{
   protected:
-    std::map<std::string, std::string> _server;
+    static std::map<std::string, std::string> _server;
 
   public:
     ResponsePHP(Request &r) : Response(r){
@@ -122,7 +127,20 @@ namespace http {
       std::time(&rawtime);
       return (int)rawtime;
     }
+
+    int intval(std::string string, int base=10){
+      return std::stoi(string, nullptr, base);
+    }
+
+    std::string strval(int val){
+      return std::to_string(val);
+    }
+
+    std::string strval(double val){
+      return std::to_string(val);
+    }
   };
+std::map<std::string, std::string> ResponsePHP::_server; // define static variable
 }
 
 #endif

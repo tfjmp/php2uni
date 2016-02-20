@@ -32,6 +32,7 @@ targets.each do |c|
   end
   include_str+="#include \"#{c[2]}\"\n"
 end
+include_str+="\n\nusing namespace php;\n"
 
 routes_str=""
 routes.each do |c|
