@@ -8,7 +8,7 @@
   require 'elements/header.php'
 ?>
 
-<p>We know make a small demonstration.</p>
+<p>This is a small demonstration.</p>
 
 <?php
 function /*void*/ my_function(){

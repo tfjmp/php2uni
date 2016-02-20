@@ -19,16 +19,37 @@
 #define PHP2UNI_RESPONSE_PHP_HPP
 
 #define _s__GET _req._get
+#define _s__SERVER _server
 
 #include <ctime>
 #include "date_constants.hpp"
 #include "response.hpp"
 
 namespace http {
+
+  typedef char* cstr_t;
+
   class ResponsePHP: public Response{
+  protected:
+    std::map<std::string, std::string> _server;
 
   public:
-    ResponsePHP(Request &r) : Response(r){}
+    ResponsePHP(Request &r) : Response(r){
+      _server["SERVER_SOFTWARE"]=_header_attributes["Server"];
+      _server["SERVER_PROTOCOL"]=r.get_method();
+      _server["REQUEST_METHOD"]=r.get_version();
+      _server["REQUEST_TIME"]=std::to_string(time());
+      _server["DOCUMENT_ROOT"]="/";
+      _server["QUERY_STRING"]=r.get_query();
+      _server["REQUEST_URI"]=r.get_uri();
+      _server["PATH_INFO"]=r.get_path();
+      std::map<std::string, std::string> req_header = r.get_header_map();
+      _server["HTTP_ACCEPT"]=req_header["Accept"];
+      _server["HTTP_ACCEPT_LANGUAGE"]=req_header["Accept-Language"];
+      _server["HTTP_CONNECTION"]=req_header["Connection"];
+      _server["HTTP_HOST"]=req_header["Host"];
+      _server["HTTP_USER_AGENT"]=req_header["User-Agent"];
+    }
 
     void echo(std::string str){
       _body+=str;
@@ -72,7 +93,7 @@ namespace http {
         ss << "+00:00";
       }else{ // default to W3C
         ss << 1900 + ltm->tm_year << "-" <<  1 + ltm->tm_mon << "-" << ltm->tm_mday;
-        ss << " " << 1 + ltm->tm_hour << ":" << 1 + ltm->tm_min << ":" << 1 + ltm->tm_sec;
+        ss << " " << (1 + ltm->tm_hour)%24 << ":" << (1 + ltm->tm_min)%60 << ":" << (1 + ltm->tm_sec)%60;
         ss << "+00:00";
       }
       return ss.str();
@@ -93,6 +114,12 @@ namespace http {
       timeinfo->tm_sec = second-1;
       rawtime = std::mktime(timeinfo);
 
+      return (int)rawtime;
+    }
+
+    int time(){
+      std::time_t rawtime;
+      std::time(&rawtime);
       return (int)rawtime;
     }
   };

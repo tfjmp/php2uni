@@ -109,7 +109,7 @@ namespace http {
       _req=r;
       _version=r.get_version();
       _status=200;
-      _header_attributes["Server"]="PHP2Uni prototype 0.1";
+      _header_attributes["Server"]="PHP2Uni v0.1";
       _header_attributes["Content-Type"]="text/html; charset=UTF-8";
       _header_attributes["Accept-Ranges"]="none";
       _header_attributes["Connection"]="close";

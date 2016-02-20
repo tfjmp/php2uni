@@ -44,6 +44,10 @@ namespace http {
     std::string get_version(){
       return _version;
     }
+
+    std::map<std::string, std::string> get_header_map(){
+      return _header_attributes;
+    }
   };
 }
 
