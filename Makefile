@@ -8,6 +8,7 @@ install:
 all:
 	cp -r ./seed ./build
 	cp -r ./src/http/* ./build/seed
+	cp -r ./src/php/* ./build/seed
 	./build.rb ./build/seed/routes
 	cd ./build/seed && make
 	cp ./build/seed/PHP2Uni ./seed/PHP2Uni

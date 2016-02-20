@@ -67,16 +67,14 @@ void Service::start() {
   sock.onAccept([](net::TCP::Socket& conn){
     std::string str_request = conn.read(1024);
     printf("SERVICE got data: %s\n", str_request.c_str());
-    //str_request="GET /hello.htm HTTP/1.1";
+    // parse the request
     http::Request req(str_request);
     http::ResponseFactory rf;
+    // retrieve the response
     http::Response res = rf.create(req);
     conn.write(res.get_header());
     conn.write(res.get_body());
-    // We don't have to actively close when the http-header says "Connection: close"
-    //conn.close();
   });
 
   printf("*** PHP2UNI SERVICE STARTED *** \n");
-
 }
