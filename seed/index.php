@@ -1,65 +1,53 @@
+<!DOCTYPE html>
+<html>
 <?php
-  require_once('./test.php');
-  echo 'test';
-
-  class MyClass{
-     /*int*/ $a;
-     /*double*/ $b;
-
-    function /*int*/ getA(){
-      return $this->a;
-    }
-
-    function /*double*/ getB(){
-      return $this->b;
-    }
-
-    function /*void*/ setA(/*int*/ $v){
-      $this->a=$v;
-    }
-
-    function /*void*/ setB(/*double*/ $v){
-      $this->b=$v;
-    }
-  }
+  require 'elements/html_head.php'
 ?>
+<body>
+<?php
+  require 'elements/header.php'
+?>
+
+<p>We know make a small demonstration.</p>
 
 <?php
 function /*void*/ my_function(){
-  /*int*/ $v=4;
+  /*string*/ $v="We called a function!";
   echo $v;
 }
 ?>
 
-<?php require_once('./test.php'); ?>
+<p><?php my_function(); ?></p>
 
-<p>
 <?php
-/*int*/ $x=3;
-echo $x;
-?>
-</p>
-<p>
-<?php
-$x+=4+4;
-echo $x;
-?>
-</p>
-<p>
-<?php
-my_function();
+class MyClass{
+   /*int*/ $a;
+   /*double*/ $b;
+  function /*int*/ getA(){
+    return $this->a;
+  }
+  function /*double*/ getB(){
+    return $this->b;
+  }
+  function /*void*/ setA(/*int*/ $v){
+    $this->a=$v;
+  }
+  function /*void*/ setB(/*double*/ $v){
+    $this->b=$v;
+  }
+}
 $foo = new MyClass;
 $foo->setA(4);
-echo $foo->getA();
+$foo->setB(3.14);
 ?>
-</p>
-<p>
-<?php
-$bar = new MyClass;
-$bar->setB(3.14);
-echo $bar->getB();
-?>
+
+<p>And toyed with a class <?php echo $foo->getA(); ?>
+  , and more <?php echo $foo->getB(); ?>
+  , and more <?php echo $foo->getA()+$foo->getB(); ?>
 </p>
 
-<h2><?php echo date(W3C); ?></h2>
-<h2>Page created on <?php echo date(W3C, mktime(20, 1, 1, 2, 18, 2016)); ?></h2>
+<?php
+  require 'elements/footer.php'
+?>
+</body>
+</html>

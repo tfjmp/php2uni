@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html>
- <head>
-  <title>PHP Test</title>
- </head>
- <body>
+<?php
+  require 'elements/html_head.php'
+?>
+<body>
  <?php echo '<p>Hello World</p>'; ?>
  </body>
-</html>
+ </html>
