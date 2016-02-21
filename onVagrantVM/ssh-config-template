@@ -1,0 +1,7 @@
+Host    getphp2cpp
+        User git
+        Hostname github.com
+        IdentityFile ~/.ssh/php2cpp-deploy
+        IdentitiesOnly yes 
+        UserKnownHostsFile /dev/null
+        StrictHostKeyChecking no
