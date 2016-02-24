@@ -145,6 +145,14 @@ namespace php {
       stream << std::hex << val;
       return stream.str();
     }
+
+    int hexdec(std::string hex_string){
+      unsigned int x;
+      std::stringstream stream;
+      stream << std::hex << hex_string;
+      stream >> x;
+      return static_cast<int>(x);
+    }
   };
 std::map<std::string, std::string> ResponsePHP::_server; // define static variable
 }
