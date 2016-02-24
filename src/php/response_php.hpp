@@ -139,6 +139,12 @@ namespace php {
     std::string strval(double val){
       return std::to_string(val);
     }
+
+    std::string dechex(int val){
+      std::stringstream stream;
+      stream << std::hex << val;
+      return stream.str();
+    }
   };
 std::map<std::string, std::string> ResponsePHP::_server; // define static variable
 }

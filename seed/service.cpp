@@ -35,7 +35,6 @@ using namespace std::chrono;
 std::unique_ptr<net::Inet4<VirtioNet> > inet;
 
 void Service::start() {
-
   // Assign a driver (VirtioNet) to a network interface (eth0)
   // @note: We could determine the appropirate driver dynamically, but then we'd
   // have to include all the drivers into the image, which  we want to avoid.
@@ -61,9 +60,7 @@ void Service::start() {
   printf("SERVICE: %i open ports in TCP @ %p \n",
       inet->tcp().openPorts(), &(inet->tcp()));
 
-  srand(OS::cycles_since_boot());
-
-  // Add a TCP connection handler - here a hardcoded HTTP-service
+  // TCP connection handler - here a hardcoded HTTP-service
   sock.onAccept([](net::TCP::Socket& conn){
     std::string str_request = conn.read(1024);
     printf("SERVICE got data: %s\n\n", str_request.c_str());
