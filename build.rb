@@ -15,8 +15,8 @@ src.each_line do |entry|
   method = /(GET|POST)\s([\/\w|.*]*)\s([\/\w*]*.php)/.match(entry)[1]
   uri = /(POST|GET)\s([\/\w|.*]*)\s([\/\w*]*.php)/.match(entry)[2]
   file = /(POST|GET)\s([\/\w|.*]*)\s([\/\w*]*.php)/.match(entry)[3]
-  cpp = "response_"+file.gsub(".php", ".hpp")
-  name = file.gsub(/.php|-|_/, "")
+  cpp = "response_"+file.gsub("/", "_").gsub(".php", ".hpp")
+  name = file.gsub(/.php|-|_|\//, "")
   name = "Response"+name.capitalize
   targets.add [name, file, cpp]
   routes.add [method, uri, name]

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <?php
-  require 'elements/html_head.php'
+  require_once 'elements/html_head.php';
 ?>
 <body>
 <?php
-  require 'elements/header.php'
+  require_once 'elements/header.php';
 ?>
 
 <p>This is a small demonstration.</p>
@@ -49,7 +49,7 @@ $foo->setB(3.14);
 <p><a href="/hello?hello=world&from=index">Get parameter example.</a></p>
 
 <?php
-  require 'elements/footer.php'
+  require_once 'elements/footer.php';
 ?>
 </body>
 </html>

@@ -1,4 +1,4 @@
-GET / index.php
-GET /primes primes.php
-GET /index index.php
-GET /hello hello_get.php
+GET / src/index.php
+GET /primes src/primes.php
+GET /index src/index.php
+GET /hello src/hello_get.php

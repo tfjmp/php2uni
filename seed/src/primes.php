@@ -16,7 +16,7 @@ function /*bool*/ isPrime(/*int*/ $n) {
  return true;
 }
 
-/*int*/ $n;
+/*int*/ $n=0;
 for (/*int*/ $i = 3; $i < 5000; $i++) {
   if (isPrime($i)) {
     $n = $i;
