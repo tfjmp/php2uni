@@ -1,5 +1,7 @@
 install:
 	mkdir -p build
+	sudo apt-get install build-essential nasm texinfo clang-3.6 cmake ninja-build subversion zlib1g-dev libtinfo-dev
+	sudo apt-get install ruby
 	cd ./build && git clone https://github.com/tfjmp/php2cpp.git
 	cd ./build/php2cpp && make install && make all
 	cd ./build && git clone https://github.com/hioa-cs/IncludeOS.git
