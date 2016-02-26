@@ -1,3 +1,4 @@
 GET / index.php
+GET /primes primes.php
 GET /index index.php
 GET /hello hello_get.php

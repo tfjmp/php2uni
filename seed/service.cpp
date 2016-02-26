@@ -63,7 +63,6 @@ void Service::start() {
   // TCP connection handler - here a hardcoded HTTP-service
   sock.onAccept([](net::TCP::Socket& conn){
     std::string str_request = conn.read(1024);
-    printf("SERVICE got data: %s\n\n", str_request.c_str());
     // parse the request
     http::Request req(str_request);
     http::ResponseFactory rf;
@@ -71,6 +70,7 @@ void Service::start() {
     http::Response res = rf.create(req);
     conn.write(res.get_header());
     conn.write(res.get_body());
+    conn.close();
   });
 
   printf("*** PHP2UNI SERVICE STARTED *** \n");
