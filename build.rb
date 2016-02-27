@@ -26,7 +26,7 @@ include_str = ""
 targets.each do |c|
   puts "Building #{c[1]}"
   Dir.chdir("build/seed") do
-    abort "prepare.rb failed" unless system "../php2cpp/prepare.rb ./#{c[1]} ./#{c[1]}"
+    abort "prepare.rb failed" unless system "../php2cpp/prepare.rb ./#{c[1]} ./_tmp.php"
     abort "php2cpp failed" unless system "../php2cpp/php2cpp ./_tmp.php ./_tmp.cpp #{c[0]}"
     abort "php2cpp failed" unless system "../php2cpp/uncrustify -c ../php2cpp/build/uncrustify/etc/gnu-indent.cfg -f _tmp.cpp > #{c[2]}"
   end
