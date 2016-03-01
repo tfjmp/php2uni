@@ -11,7 +11,7 @@ install:
 	cd ./build/rumprun && git submodule update --init
 	cd ./build/rumprun && git submodule update --init
 	cd ./build/rumprun && CC=cc ./build-rr.sh hw
-	cd ./build/rumprun && export PATH="${PATH}:$(pwd)/rumprun/bin"
+	export PATH="${PATH}:${PWD}/build/rumprun/rumprun/bin"
 
 
 all:
@@ -22,15 +22,18 @@ all:
 	cp -r ./src/rump/* ./build/seed
 	./build.rb ./build/seed/routes
 	cd ./build/seed && make
-	cp ./build/seed/PHP2Uni.img ./seed/PHP2Uni.img
+	cp ./build/seed/PHP2Uni.img ./seed/php2uni-includeos.img
 	cd ./build/seed && clang++-3.6 -std=c++11 -stdlib=libc++ rump.cpp -o app.o -pedantic -Wall
 	cp ./build/seed/app.o ./seed/app.o
 	cd ./build/seed && x86_64-rumprun-netbsd-g++ -std=c++11 -o php2uni-rumprun rump.cpp
-	cd ./build/seed && rumprun-bake hw_generic php2uni-rumprun.bin php2uni-rumprun
-	cp ./build/seed/php2uni-rumprun ./seed/php2uni-rumprun.bin
+	cd ./build/seed && rumprun-bake hw_generic php2uni-rumprun.img php2uni-rumprun
+	cp ./build/seed/php2uni-rumprun ./seed/php2uni-rumprun.img
 	rm -r ./build/seed/*
 
 run:
-	./seed/run.sh ./seed/PHP2Uni.img
+	./seed/run.sh ./seed/php2uni-includeos.img
+
+run_rump:
+	rumprun kvm -i ./seed/php2uni-rumprun.img
 
 default: all
