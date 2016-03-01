@@ -19,6 +19,8 @@
 *
 */
 
+#define INCLUDEOS
+
 #include <os>
 #include <net/inet4>
 #include <math.h>
