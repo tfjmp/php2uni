@@ -36,7 +36,7 @@ all:
 clean:
 	rm -r ./build/seed/*
 
-run:
+run_includeos:
 	./seed/run.sh ./seed/php2uni-includeos.img
 
 tap_rump:
@@ -47,5 +47,7 @@ tap_rump:
 run_rump:
 	cd ./seed && rumprun kvm -i -M 128 -I if,vioif,'-net tap,script=no,ifname=tap0' -W if,inet,static,10.0.120.101/24 -- ./php2uni-rumprun.img
 
+run_app:
+	./seed/app.o
 
 default: all
