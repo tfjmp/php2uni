@@ -39,6 +39,7 @@ build/
 # unikernel building
 *.o
 *~
+*.bin
 
 PHP2Uni
 *.img
