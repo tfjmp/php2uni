@@ -13,6 +13,10 @@ install:
 	cd ./build/rumprun && CC=cc ./build-rr.sh hw
 	export PATH="${PATH}:${PWD}/build/rumprun/rumprun/bin"
 
+rump_test:
+	cd ./test && x86_64-rumprun-netbsd-gcc -o helloer-rumprun helloer.c
+	cd ./test && rumprun-bake hw_virtio helloer-rumprun.bin helloer-rumprun
+	cd ./test && rumprun kvm -i helloer-rumprun.bin
 
 all:
 	cp -r ./seed ./build
@@ -25,15 +29,23 @@ all:
 	cp ./build/seed/PHP2Uni.img ./seed/php2uni-includeos.img
 	cd ./build/seed && clang++-3.6 -std=c++11 -stdlib=libc++ rump.cpp -o app.o -pedantic -Wall
 	cp ./build/seed/app.o ./seed/app.o
-	cd ./build/seed && x86_64-rumprun-netbsd-g++ -std=c++11 -o php2uni-rumprun rump.cpp
-	cd ./build/seed && rumprun-bake hw_generic php2uni-rumprun.img php2uni-rumprun
-	cp ./build/seed/php2uni-rumprun ./seed/php2uni-rumprun.img
+	cd ./build/seed && x86_64-rumprun-netbsd-g++ -o php2uni-rumprun rump.cpp
+	cd ./build/seed && rumprun-bake hw_virtio php2uni-rumprun.img php2uni-rumprun
+	cp ./build/seed/php2uni-rumprun.img ./seed/php2uni-rumprun.img
+
+clean:
 	rm -r ./build/seed/*
 
 run:
 	./seed/run.sh ./seed/php2uni-includeos.img
 
+tap_rump:
+	sudo ip tuntap add tap0 mode tap
+	sudo ip addr add 10.0.120.100/24 dev tap0
+	sudo ip link set dev tap0 up
+
 run_rump:
-	rumprun kvm -i ./seed/php2uni-rumprun.img
+	cd ./seed && rumprun kvm -i -M 128 -I if,vioif,'-net tap,script=no,ifname=tap0' -W if,inet,static,10.0.120.101/24 -- ./php2uni-rumprun.img
+
 
 default: all

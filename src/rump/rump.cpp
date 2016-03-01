@@ -32,6 +32,8 @@
 #include "response.hpp"
 #include "response_factory.hpp"
 
+#define PORT "80"
+
 void handle_request(int conn){
 	int status;
 	char buf[1025];
@@ -59,7 +61,7 @@ int main(int argc, char * argv[])
 	hints.ai_socktype = SOCK_STREAM; // TCP Socket SOCK_DGRAM
 	hints.ai_flags = AI_PASSIVE;
 
-	status = getaddrinfo(NULL, "8888" , &hints, &res);
+	status = getaddrinfo(NULL, PORT, &hints, &res);
 	if(status != 0)
 	{
 		fprintf(stderr,"getaddrinfo error: %s\n",gai_strerror(status));
@@ -89,9 +91,11 @@ int main(int argc, char * argv[])
 	socklen_t addr_size;
 	addr_size = sizeof client_addr;
 
-	printf("Accepting connections ...\n");
+	printf("Listening on port %s ...\n",  PORT);
 	while(1){
+		printf("Accepting connections ...\n");
 		int conn = accept(listner, (struct sockaddr *) & client_addr, &addr_size);
+		printf("Connection received\n");
 		if(conn < 0)
 		{
 			fprintf(stderr,"accept: %s\n",gai_strerror(conn));
