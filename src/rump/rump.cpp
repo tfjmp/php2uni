@@ -93,9 +93,7 @@ int main(int argc, char * argv[])
 
 	printf("Listening on port %s ...\n",  PORT);
 	while(1){
-		printf("Accepting connections ...\n");
 		int conn = accept(listner, (struct sockaddr *) & client_addr, &addr_size);
-		printf("Connection received\n");
 		if(conn < 0)
 		{
 			fprintf(stderr,"accept: %s\n",gai_strerror(conn));
