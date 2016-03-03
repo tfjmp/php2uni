@@ -38,10 +38,13 @@ all:
 clean:
 	rm -r ./build/seed/*
 
+bridge_includeos:
+	sudo ./build/IncludeOS/etc/create_bridge.sh
+
 run_includeos:
 	./seed/run.sh ./seed/php2uni-includeos.img
 
-tap_rump:
+bridge_rump:
 	sudo ip tuntap add tap0 mode tap
 	sudo ip addr add 10.0.120.100/24 dev tap0
 	sudo ip link set dev tap0 up
