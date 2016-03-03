@@ -12,6 +12,8 @@ install:
 	cd ./build/rumprun && git submodule update --init
 	cd ./build/rumprun && CC=cc ./build-rr.sh hw
 	export PATH="${PATH}:${PWD}/build/rumprun/rumprun/bin"
+	echo "export PATH=\"\${PATH}:${PWD}/build/rumprun/rumprun/bin\"" | sudo tee /etc/profile.d/rumprun.sh
+	sudo chmod +x /etc/profile.d/rumprun.sh
 
 rump_test:
 	cd ./test && x86_64-rumprun-netbsd-gcc -o helloer-rumprun helloer.c
