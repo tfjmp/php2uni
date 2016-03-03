@@ -50,7 +50,7 @@ bridge_rump:
 	sudo ip link set dev tap0 up
 
 run_rump:
-	cd ./seed && rumprun kvm -i -M 128 -I if,vioif,'-net tap,script=no,ifname=tap0' -W if,inet,static,10.0.120.101/24 -- ./php2uni-rumprun.img --nographic
+	cd ./seed && rumprun kvm -M 20 -I if,vioif,'-net tap,script=no,ifname=tap0' -W if,inet,static,10.0.120.101/24 -- ./php2uni-rumprun.img
 
 run_app:
 	./seed/app.o
