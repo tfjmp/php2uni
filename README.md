@@ -11,14 +11,19 @@ To get started simply:
   $ git clone https://github.com/tfjmp/php2uni.git
   $ cd php2uni
   $ make install
-  $ make rump_test # test rump installation
+  # test rump installation
+  $ make rump_test
   $ make all
+
   # bridge and run IncludeOS VM
   $ make bridge_includeos
   $ make run_includeos
-   bridge and run Rump VM
+  #listen at 10.0.0.42:80
+
+  #bridge and run Rump VM
   $ make bridge_rump
   $ make run_rump
+  #listen at 10.0.120.101:8080
 ```
 
 The install phase may take a while (around 30mins) and will ask for root privileges.

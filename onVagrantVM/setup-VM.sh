@@ -26,6 +26,13 @@ cd ~/build && git clone getphp2cpp:tfjmp/php2cpp.git
 cd ~/build/php2cpp && make install && make all
 cd ~/build && git clone https://github.com/hioa-cs/IncludeOS.git
 cd ~/build/IncludeOS && ./install.sh
+cd ~/build && git clone http://repo.rumpkernel.org/rumprun
+cd ~/build/rumprun && git submodule update --init
+cd ~/build/rumprun && git submodule update --init
+cd ~/build/rumprun && CC=cc ./build-rr.sh hw
+export PATH="${PATH}:${PWD}/build/rumprun/rumprun/bin"
+echo "export PATH=\"\${PATH}:${PWD}/build/rumprun/rumprun/bin\"" | sudo tee /etc/profile.d/rumprun.sh
+sudo chmod +x /etc/profile.d/rumprun.sh
 
 # copy files to ensure that Makefile works
 cd /vagrant
@@ -34,4 +41,5 @@ cp -r seed src build.rb Makefile ~
 # do everytime build steps
 cd
 make all
-make run
+make run_includeos
+make run_rump
