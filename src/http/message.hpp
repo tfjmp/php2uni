@@ -22,6 +22,13 @@
 #ifndef PHP2UNI_MESSAGE_HPP
 #define PHP2UNI_MESSAGE_HPP
 
+#ifdef INCLUDEOS
+#pragma message "building against IncludeOS"
+#endif
+#ifdef RUMP_KERNEL
+#pragma message "building against Rump Kernel"
+#endif
+
 #include <map>
 
 namespace http {
