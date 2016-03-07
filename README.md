@@ -1,4 +1,4 @@
-# php2uni
+# PHP2Uni
 
 This project build uppon the [IncludeOS](http://www.includeos.org/) and [Rump Kernel](http://rumpkernel.org/) Unikernel.
 The idea is simply to transpile PHP file into a Unikernel.
