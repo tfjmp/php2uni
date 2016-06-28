@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/tfjmp/php2uni.png?label=ready&title=Ready)](https://waffle.io/tfjmp/php2uni)
 # PHP2Uni
 
 This project build uppon the [IncludeOS](http://www.includeos.org/) and [Rump Kernel](http://rumpkernel.org/) Unikernel.
